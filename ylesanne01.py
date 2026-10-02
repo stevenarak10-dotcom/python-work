@@ -1,0 +1,5 @@
+print(type(int(25)))
+print(type(int("25")))
+print(type(int(25.0)))
+print(type(float("25.0")))
+print(type(str(-10)))
