@@ -1,0 +1,5 @@
+lause = input("Sisesta lause: ")
+otsitav = input("Sisesta otsitav tekstiosa: ")
+asendus = input("Sisesta asendussõna: ")
+tulemus = lause.replace(otsitav, asendus)
+print(f"Tulemus: {tulemus}")

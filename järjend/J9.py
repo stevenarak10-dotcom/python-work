@@ -1,0 +1,11 @@
+ostukorv = []
+ostukorv.append("muna")
+print(ostukorv)
+ostukorv.append("piim")
+print(ostukorv)
+ostukorv.append("leib")
+print(ostukorv)
+ostukorv.append("või")
+print(ostukorv)
+ostukorv.append("juust")
+print("juust")
