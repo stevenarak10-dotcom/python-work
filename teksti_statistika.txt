@@ -1,0 +1,7 @@
+TEKSTI STATISTIKA ARUANNE
+===================================
+Ridade arv: 559
+Sõnade arv: 2327
+Tähemärke kokku (koos tühikutega): 30397
+Tähemärke (ilma tühikuteta): 21752
+Pikim sõna: 'href="https://marhamilresearch4.blob.core.windows.net/gutenberg-public/Website/index.html">Open' (95 tähemärki)
