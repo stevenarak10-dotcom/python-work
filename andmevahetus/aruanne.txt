@@ -1,17 +1,17 @@
 ÕPILASTE TULEMUSTE ARUANNE
 ------------------------------
 
-Mari;85;92;78Keskmine: 0.00   Hinne: 1
-Jüri;60;55;70Keskmine: 0.00   Hinne: 1
-Anna;95;88;91Keskmine: 0.00   Hinne: 1
-Peeter;40;52;48Keskmine: 0.00   Hinne: 1
-Kati;78;82;85Keskmine: 0.00   Hinne: 1
-Martin;67;73;69Keskmine: 0.00   Hinne: 1
-Laura;90;94;96Keskmine: 0.00   Hinne: 1
-Rasmus;50;45;55Keskmine: 0.00   Hinne: 1
+Mari       Keskmine: 85.00  Hinne: 4
+Jüri       Keskmine: 61.67  Hinne: 3
+Anna       Keskmine: 91.33  Hinne: 5
+Peeter     Keskmine: 46.67  Hinne: 1
+Kati       Keskmine: 81.67  Hinne: 4
+Martin     Keskmine: 69.67  Hinne: 3
+Laura      Keskmine: 93.33  Hinne: 5
+Rasmus     Keskmine: 50.00  Hinne: 2
 
 ------------------------------
-Klassi keskmine: 0.00
-Parim õpilane: Mari;85;92;78
-Nõrgim õpilane: Mari;85;92;78
-Positiivse hindega õpilasi: 0
+Klassi keskmine: 68.96
+Parim õpilane: Laura
+Nõrgim õpilane: Peeter
+Positiivse hindega õpilasi: 6

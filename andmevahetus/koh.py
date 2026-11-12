@@ -1,88 +1,85 @@
 import os
 
-naidisandmed = """Mari 80 90 85
-Jüri 60 70 55
-Anna 95 89 90
-Peeter 40 50 50
-Kati 85 80 80
-Martin 65 74 70
-Laura 92 98 90
-Rasmus 50 50 50"""
+SISENDFAIL = "tulemused.txt"
+VALJUNDFAIL = "aruanne.txt"
 
-if not os.path.exists("tulemused.txt"):
-    with open("tulemused.txt", "w", encoding="utf-8") as f:
-        f.write(naidisandmed.strip())
+def määra_hinne(keskmine):
+    """Määrab hinde vastavalt etteantud skaalale."""
+    if keskmine >= 90:
+        return 5
+    elif keskmine >= 75:
+        return 4
+    elif keskmine >= 60:
+        return 3
+    elif keskmine >= 50:
+        return 2
+    else:
+        return 1
 
-if not os.path.exists("tulemused.txt"):
-    print("Viga: Lähtefaili 'tulemused.txt' ei leitud! Palun veendu, et fail asub samas kaustas.")
-else:
-    opilaste_andmed = []
-    koik_keskmised = []
-    positiivsed_loendur = 0
+def main():
+    if not os.path.exists(SISENDFAIL):
+        print(f"Viga: Lähtefaili '{SISENDFAIL}' ei leitud!")
+        return
 
-    with open("tulemused.txt", "r", encoding="utf-8") as fail:
-        for rida in fail:
+    opilased = []
+
+    with open(SISENDFAIL, "r", encoding="utf-8") as fail:
+        for rea_nr, rida in enumerate(fail, start=1):
             rida = rida.strip()
             if not rida:
                 continue
 
-            osad = rida.split()
-            nimi = osad[0]
-            tulemused = [float(x) for x in osad[1:]]
-            keskmine = sum(tulemused) / len(tulemused) if len(tulemused) > 0 else 0
-            koik_keskmised.append(keskmine)
+            osad = rida.split(";")
+            if len(osad) != 4:
+                print(f"Hoiatus: Rida {rea_nr} ('{rida}') on vigase vorminguga ja jäetakse vahele.")
+                continue
 
-            if 90 <= keskmine <= 100:
-                hinne = 5
-            elif 75 <= keskmine < 90:
-                hinne = 4
-            elif 60 <= keskmine < 75:
-                hinne = 3
-            elif 50 <= keskmine < 60:
-                hinne = 2
-            else:
-                hinne = 1
+            try:
+                nimi = osad[0].strip()
+                tulemused = [float(osad[1]), float(osad[2]), float(osad[3])]
+            except ValueError:
+                print(f"Hoiatus: Real {rea_nr} ('{rida}') ei ole punktid numbrid ja rida jäetakse vahele.")
+                continue
 
-            if hinne >= 3:
-                positiivsed_loendur += 1
-                
-            opilaste_andmed.append({
+            keskmine = sum(tulemused) / len(tulemused)
+            hinne = määra_hinne(keskmine)
+
+            opilased.append({
                 "nimi": nimi,
                 "keskmine": keskmine,
                 "hinne": hinne
             })
 
-    klassi_keskmine = sum(koik_keskmised) / len(koik_keskmised) if len(koik_keskmised) > 0 else 0
-    parim_opilane = max(opilaste_andmed, key=lambda x: x["keskmine"])["nimi"]
-    norgim_opilane = min(opilaste_andmed, key=lambda x: x["keskmine"])["nimi"]
+    if not opilased:
+        print("Viga: Failist ei leitud ühtegi korrektset õpilase rida.")
+        print("Kontrolli, et failis 'tulemused.txt' oleksid andmed kujul: Mari;85;92;78")
+        return
 
-    valjund = []
-    valjund.append("ÕPILASTE TULEMUSTE ARUANNE")
-    valjund.append("-" * 30)
-    valjund.append("")
+    klassi_keskmine = sum(o["keskmine"] for o in opilased) / len(opilased)
+    parim_opilane = max(opilased, key=lambda o: o["keskmine"])["nimi"]
+    norgim_opilane = min(opilased, key=lambda o: o["keskmine"])["nimi"]
+    positiivseid = sum(1 for o in opilased if o["hinne"] >= 3)
 
-    for opilane in opilaste_andmed:
-        valjund.append(f"{opilane['nimi']:<12}Keskmine: {opilane['keskmine']:<7.2f}Hinne: {opilane['hinne']}")
+    aruande_read = [
+        "ÕPILASTE TULEMUSTE ARUANNE",
+        "-" * 35
+    ]
 
-    valjund.append("")
-    valjund.append("-" * 30)
-    valjund.append(f"Klassi keskmine: {klassi_keskmine:.2f}")
-    valjund.append(f"Parim õpilane: {parim_opilane}")
-    valjund.append(f"Nõrgim õpilane: {norgim_opilane}")
-    valjund.append(f"Positiivse hindega õpilasi: {positiivsed_loendur}")
+    for o in opilased:
+        aruande_read.append(f"{o['nimi']:<10} Keskmine: {o['keskmine']:.2f}  Hinne: {o['hinne']}")
 
-    kogu_tekst = "\n".join(valjund)
+    aruande_read.append("-" * 35)
+    aruande_read.append(f"Klassi keskmine: {klassi_keskmine:.2f}")
+    aruande_read.append(f"Parim õpilane: {parim_opilane}")
+    aruande_read.append(f"Nõrgim õpilane: {norgim_opilane}")
+    aruande_read.append(f"Positiivse hindega õpilasi: {positiivseid}")
 
-    print(kogu_tekst)
-    with open("aruanne.txt", "w", encoding="utf-8") as fail_valjund:
-        fail_valjund.write(kogu_tekst)
-        
-    print("\n[Info] Fail 'aruanne.txt' on edukalt loodud ja sisaldab sama kokkuvõtet.")
-    osad = rida.split()
+    lopptekst = "\n".join(aruande_read)
 
-if len(osad) > 1:
-    nimi = osad[0]
-    tulemused = [float(x) for x in osad[1:]]
-    keskmine = sum(tulemused) / len(tulemused) if len(tulemused) > 0 else 0
-else:
-    print(f"Viga: Real '{rida}' puuduvad tulemused. Palun veendu, et iga õpilase järel oleks vähemalt üks tulemus.")
+    print(lopptekst)
+
+    with open(VALJUNDFAIL, "w", encoding="utf-8") as valjund:
+        valjund.write(lopptekst + "\n")
+
+if __name__ == "__main__":
+    main()
