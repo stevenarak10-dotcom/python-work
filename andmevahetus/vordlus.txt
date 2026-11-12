@@ -1,0 +1,11 @@
+Mõlemas failis esinevad nimed:
+- Anna
+- Jüri
+
+Ainult esimeses failis olevad nimed:
+- Mari
+- Peeter
+
+Ainult teises failis olevad nimed:
+- Kati
+- Martin
