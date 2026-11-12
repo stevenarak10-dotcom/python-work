@@ -1,0 +1,5 @@
+Täna on ilus ja päikeseline ilm.
+Mulle meeldib Pythonis programmeerida.
+Koodi kirjutamine teeb meele rõõmsaks.
+Failidega töötamine on tegelikult lihtne.
+See on selle ülesande viies lause.

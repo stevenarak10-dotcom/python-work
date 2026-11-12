@@ -1,11 +1,7 @@
-laused = """Täna on ilus ja päikeseline ilm.
-Mulle meeldib Pythonis programmeerida.
-Koodi kirjutamine teeb meele rõõmsaks.
-Failidega töötamine on tegelikult lihtne.
-See on selle ülesande viies lause."""
+
 
 with open("algtekst.txt", "w", encoding="utf-8") as fail:
-    fail.write(laused)
+    fail.write("See on algtekst, mis sisaldab nii suuri kui ka väikeseid tähti.\n")
 
 with open("algtekst.txt", "r", encoding="utf-8") as algfail:
     sisu = algfail.read()
